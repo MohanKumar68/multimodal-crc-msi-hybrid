@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.MultimodalResearchApp" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/pathology_navy</item>
+        <item name="android:navigationBarColor">@color/pathology_background</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>

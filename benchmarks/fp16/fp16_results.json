@@ -1,0 +1,632 @@
+{
+  "timestamp": "2026-10-07T12:13:39.396582",
+  "accuracy": 0.8939393939393939,
+  "roc_auc": 0.92875,
+  "avg_latency_ms": 41.0086742410909,
+  "median_latency_ms": 32.96715000033146,
+  "p95_latency_ms": 109.7886749994359,
+  "min_latency_ms": 2.2480000043287873,
+  "max_latency_ms": 112.66689999320079,
+  "throughput_pts_sec": 20.38863455958425,
+  "throughput_pts_min": 1223.318073575055,
+  "peak_ram_mb": 358.51953125,
+  "patient_ids": [
+    "TCGA-AD-5900",
+    "TCGA-AA-3877",
+    "TCGA-G4-6320",
+    "TCGA-AD-6889",
+    "TCGA-A6-3809",
+    "TCGA-AY-6197",
+    "TCGA-A6-6653",
+    "TCGA-AA-3821",
+    "TCGA-EI-6507",
+    "TCGA-CM-6674",
+    "TCGA-AA-3845",
+    "TCGA-AA-3811",
+    "TCGA-D5-6540",
+    "TCGA-F4-6856",
+    "TCGA-D5-6927",
+    "TCGA-D5-6928",
+    "TCGA-AY-A71X",
+    "TCGA-AZ-5403",
+    "TCGA-A6-3807",
+    "TCGA-AH-6643",
+    "TCGA-CM-6167",
+    "TCGA-A6-6137",
+    "TCGA-AG-3892",
+    "TCGA-CM-5348",
+    "TCGA-AA-A03J",
+    "TCGA-F5-6465",
+    "TCGA-DC-6682",
+    "TCGA-CM-6170",
+    "TCGA-DC-6683",
+    "TCGA-A6-5662",
+    "TCGA-F4-6808",
+    "TCGA-AA-3681",
+    "TCGA-CM-6163",
+    "TCGA-AG-3882",
+    "TCGA-CM-6675",
+    "TCGA-DM-A0X9",
+    "TCGA-AA-3875",
+    "TCGA-EI-6508",
+    "TCGA-A6-4105",
+    "TCGA-F4-6854",
+    "TCGA-CM-6169",
+    "TCGA-A6-6138",
+    "TCGA-AG-4015",
+    "TCGA-AA-3666",
+    "TCGA-AA-3696",
+    "TCGA-AZ-5407",
+    "TCGA-EF-5830",
+    "TCGA-F4-6459",
+    "TCGA-F5-6464",
+    "TCGA-AA-3994",
+    "TCGA-AF-2690",
+    "TCGA-D5-6534",
+    "TCGA-AG-A00C",
+    "TCGA-AG-3902",
+    "TCGA-AA-3693",
+    "TCGA-A6-6142",
+    "TCGA-F4-6463",
+    "TCGA-AF-2693",
+    "TCGA-A6-5664",
+    "TCGA-AG-3894",
+    "TCGA-AG-3726",
+    "TCGA-AA-3989",
+    "TCGA-AD-6963",
+    "TCGA-AG-3890",
+    "TCGA-AF-6655",
+    "TCGA-D5-6539"
+  ],
+  "fp32_results": {
+    "system_info": {
+      "cpu_model": "12th Gen Intel(R) Core(TM) i5-1235U",
+      "process_memory_mb": 301.54296875,
+      "system_ram_gb": 15.65203857421875,
+      "system_ram_available_gb": 0.8680076599121094,
+      "physical_cores": 10,
+      "logical_cores": 12,
+      "cpu_percent": 15.2,
+      "gpu_available": false,
+      "gpu_name": "None",
+      "gpu_memory_gb": 0,
+      "gpu_utilization": 0,
+      "gpu_memory_used_gb": 0,
+      "os": "Windows",
+      "os_version": "10.0.26200",
+      "python_version": "3.11.7",
+      "pytorch_version": "2.9.1+cpu",
+      "timestamp": "2026-10-07T12:11:38.931497"
+    },
+    "model_info": {
+      "model_file_path": "models/fusion_model_v1_1.pth",
+      "model_file_size_mb": 20.03,
+      "trainable_params": 5250561,
+      "total_params": 5250561,
+      "parameter_dtype": "torch.float32",
+      "model_architecture": "SummaryToPatchCrossAttention",
+      "ram_before_loading_mb": 311.24,
+      "ram_after_loading_mb": 353.06,
+      "ram_increase_mb": 41.82
+    },
+    "predictive_performance": {
+      "accuracy": 0.8787878787878788,
+      "roc_auc": 0.9299999999999999,
+      "precision_mss": 0.92,
+      "recall_mss": 0.92,
+      "f1_mss": 0.92,
+      "precision_msi": 0.75,
+      "recall_msi": 0.75,
+      "f1_msi": 0.75,
+      "macro_f1": 0.835,
+      "weighted_f1": 0.8787878787878788,
+      "confusion_matrix": [
+        [
+          46,
+          4
+        ],
+        [
+          4,
+          12
+        ]
+      ],
+      "mss_count": 50,
+      "msi_count": 16
+    },
+    "inference_latency": {
+      "total_inference_time_sec": 0.5888906000327552,
+      "average_latency_ms_per_patient": 8.922584848981138,
+      "median_latency_ms": 7.568400011223275,
+      "minimum_latency_ms": 1.9071999995503575,
+      "maximum_latency_ms": 55.86780000885483,
+      "p95_latency_ms": 18.198599995230325,
+      "throughput_patients_per_sec": 112.07514603956822,
+      "throughput_patients_per_min": 6724.508762374094,
+      "per_patient_data": [
+        {
+          "patient_id": "TCGA-AD-5900",
+          "inference_time_ms": 55.86780000885483,
+          "total_time_ms": 55.903999993461184,
+          "label": 1.0,
+          "prob": 0.8605871796607971
+        },
+        {
+          "patient_id": "TCGA-AA-3877",
+          "inference_time_ms": 11.203100002603605,
+          "total_time_ms": 11.224200003198348,
+          "label": 1.0,
+          "prob": 0.9374042749404907
+        },
+        {
+          "patient_id": "TCGA-G4-6320",
+          "inference_time_ms": 17.37630000570789,
+          "total_time_ms": 17.39760000782553,
+          "label": 1.0,
+          "prob": 0.14642371237277985
+        },
+        {
+          "patient_id": "TCGA-AD-6889",
+          "inference_time_ms": 17.0568000030471,
+          "total_time_ms": 17.07830000668764,
+          "label": 1.0,
+          "prob": 0.5010508894920349
+        },
+        {
+          "patient_id": "TCGA-A6-3809",
+          "inference_time_ms": 13.132099993526936,
+          "total_time_ms": 13.155299995560199,
+          "label": 1.0,
+          "prob": 0.991041898727417
+        },
+        {
+          "patient_id": "TCGA-AY-6197",
+          "inference_time_ms": 16.936700005317107,
+          "total_time_ms": 16.958799998974428,
+          "label": 1.0,
+          "prob": 0.9933605790138245
+        },
+        {
+          "patient_id": "TCGA-A6-6653",
+          "inference_time_ms": 15.477299995836802,
+          "total_time_ms": 15.498399996431544,
+          "label": 1.0,
+          "prob": 0.992237389087677
+        },
+        {
+          "patient_id": "TCGA-AA-3821",
+          "inference_time_ms": 7.845500003895722,
+          "total_time_ms": 11.724199997843243,
+          "label": 1.0,
+          "prob": 0.18769416213035583
+        },
+        {
+          "patient_id": "TCGA-EI-6507",
+          "inference_time_ms": 6.338599996524863,
+          "total_time_ms": 6.359700011671521,
+          "label": 1.0,
+          "prob": 0.9943906664848328
+        },
+        {
+          "patient_id": "TCGA-CM-6674",
+          "inference_time_ms": 18.345599994063377,
+          "total_time_ms": 18.365600000834092,
+          "label": 1.0,
+          "prob": 0.9854828119277954
+        },
+        {
+          "patient_id": "TCGA-AA-3845",
+          "inference_time_ms": 10.823200005688705,
+          "total_time_ms": 10.843199997907504,
+          "label": 1.0,
+          "prob": 0.9866653680801392
+        },
+        {
+          "patient_id": "TCGA-AA-3811",
+          "inference_time_ms": 12.804900004994124,
+          "total_time_ms": 12.831800006097183,
+          "label": 1.0,
+          "prob": 0.3196040987968445
+        },
+        {
+          "patient_id": "TCGA-D5-6540",
+          "inference_time_ms": 9.862699997029267,
+          "total_time_ms": 12.7521000104025,
+          "label": 1.0,
+          "prob": 0.9903852939605713
+        },
+        {
+          "patient_id": "TCGA-F4-6856",
+          "inference_time_ms": 7.677900008275174,
+          "total_time_ms": 7.697799999732524,
+          "label": 1.0,
+          "prob": 0.9759442806243896
+        },
+        {
+          "patient_id": "TCGA-D5-6927",
+          "inference_time_ms": 6.86130000394769,
+          "total_time_ms": 7.790899995598011,
+          "label": 1.0,
+          "prob": 0.9890857338905334
+        },
+        {
+          "patient_id": "TCGA-D5-6928",
+          "inference_time_ms": 3.586100006941706,
+          "total_time_ms": 3.6063000006834045,
+          "label": 1.0,
+          "prob": 0.8301064968109131
+        },
+        {
+          "patient_id": "TCGA-AY-A71X",
+          "inference_time_ms": 17.290599993430078,
+          "total_time_ms": 17.312700001639314,
+          "label": 0.0,
+          "prob": 0.9016627073287964
+        },
+        {
+          "patient_id": "TCGA-AZ-5403",
+          "inference_time_ms": 7.718400011071935,
+          "total_time_ms": 10.765599989099428,
+          "label": 0.0,
+          "prob": 0.003446698421612382
+        },
+        {
+          "patient_id": "TCGA-A6-3807",
+          "inference_time_ms": 12.14780000736937,
+          "total_time_ms": 12.185300001874566,
+          "label": 0.0,
+          "prob": 0.0023253452964127064
+        },
+        {
+          "patient_id": "TCGA-AH-6643",
+          "inference_time_ms": 10.971600000630133,
+          "total_time_ms": 10.994900003424846,
+          "label": 0.0,
+          "prob": 0.37759506702423096
+        },
+        {
+          "patient_id": "TCGA-CM-6167",
+          "inference_time_ms": 18.621499999426305,
+          "total_time_ms": 18.641799993929453,
+          "label": 0.0,
+          "prob": 0.9881779551506042
+        },
+        {
+          "patient_id": "TCGA-A6-6137",
+          "inference_time_ms": 17.129699990618974,
+          "total_time_ms": 17.151499996543862,
+          "label": 0.0,
+          "prob": 0.3592613637447357
+        },
+        {
+          "patient_id": "TCGA-AG-3892",
+          "inference_time_ms": 6.436499999836087,
+          "total_time_ms": 9.671599997091107,
+          "label": 0.0,
+          "prob": 0.006376212928444147
+        },
+        {
+          "patient_id": "TCGA-CM-5348",
+          "inference_time_ms": 7.05099999322556,
+          "total_time_ms": 7.073800006764941,
+          "label": 0.0,
+          "prob": 0.07078105211257935
+        },
+        {
+          "patient_id": "TCGA-AA-A03J",
+          "inference_time_ms": 8.535400003893301,
+          "total_time_ms": 8.568499993998557,
+          "label": 0.0,
+          "prob": 0.011472624726593494
+        },
+        {
+          "patient_id": "TCGA-F5-6465",
+          "inference_time_ms": 9.662699987529777,
+          "total_time_ms": 9.677599999122322,
+          "label": 0.0,
+          "prob": 0.005315693560987711
+        },
+        {
+          "patient_id": "TCGA-DC-6682",
+          "inference_time_ms": 18.870500003686175,
+          "total_time_ms": 18.898900001659058,
+          "label": 0.0,
+          "prob": 0.10704123973846436
+        },
+        {
+          "patient_id": "TCGA-CM-6170",
+          "inference_time_ms": 4.4243000011192635,
+          "total_time_ms": 4.457999995793216,
+          "label": 0.0,
+          "prob": 0.0035567888990044594
+        },
+        {
+          "patient_id": "TCGA-DC-6683",
+          "inference_time_ms": 17.757599998731166,
+          "total_time_ms": 17.777300003217533,
+          "label": 0.0,
+          "prob": 0.1812444031238556
+        },
+        {
+          "patient_id": "TCGA-A6-5662",
+          "inference_time_ms": 8.867199998348951,
+          "total_time_ms": 8.888199998182245,
+          "label": 0.0,
+          "prob": 0.5867939591407776
+        },
+        {
+          "patient_id": "TCGA-F4-6808",
+          "inference_time_ms": 9.020500001497567,
+          "total_time_ms": 9.04160000209231,
+          "label": 0.0,
+          "prob": 0.01474077720195055
+        },
+        {
+          "patient_id": "TCGA-AA-3681",
+          "inference_time_ms": 10.180400000535883,
+          "total_time_ms": 10.209400003077462,
+          "label": 0.0,
+          "prob": 0.09123004227876663
+        },
+        {
+          "patient_id": "TCGA-CM-6163",
+          "inference_time_ms": 9.107999998377636,
+          "total_time_ms": 9.133500003372319,
+          "label": 0.0,
+          "prob": 0.015399429947137833
+        },
+        {
+          "patient_id": "TCGA-AG-3882",
+          "inference_time_ms": 3.6766999983228743,
+          "total_time_ms": 3.696999992826022,
+          "label": 0.0,
+          "prob": 0.002760288305580616
+        },
+        {
+          "patient_id": "TCGA-CM-6675",
+          "inference_time_ms": 11.481399997137487,
+          "total_time_ms": 11.50249999773223,
+          "label": 0.0,
+          "prob": 0.16224952042102814
+        },
+        {
+          "patient_id": "TCGA-DM-A0X9",
+          "inference_time_ms": 6.930799994734116,
+          "total_time_ms": 6.949800008442253,
+          "label": 0.0,
+          "prob": 0.02134578488767147
+        },
+        {
+          "patient_id": "TCGA-AA-3875",
+          "inference_time_ms": 8.728400003747083,
+          "total_time_ms": 8.75100000121165,
+          "label": 0.0,
+          "prob": 0.002443060278892517
+        },
+        {
+          "patient_id": "TCGA-EI-6508",
+          "inference_time_ms": 2.710999993723817,
+          "total_time_ms": 2.7306999982101843,
+          "label": 0.0,
+          "prob": 0.09077432751655579
+        },
+        {
+          "patient_id": "TCGA-A6-4105",
+          "inference_time_ms": 5.816600008984096,
+          "total_time_ms": 5.836700001964346,
+          "label": 0.0,
+          "prob": 0.0067361462861299515
+        },
+        {
+          "patient_id": "TCGA-F4-6854",
+          "inference_time_ms": 4.986399988410994,
+          "total_time_ms": 5.006799998227507,
+          "label": 0.0,
+          "prob": 0.06591170281171799
+        },
+        {
+          "patient_id": "TCGA-CM-6169",
+          "inference_time_ms": 8.63690000551287,
+          "total_time_ms": 8.656399993924424,
+          "label": 0.0,
+          "prob": 0.02765534073114395
+        },
+        {
+          "patient_id": "TCGA-A6-6138",
+          "inference_time_ms": 3.6958999990019947,
+          "total_time_ms": 5.671099992468953,
+          "label": 0.0,
+          "prob": 0.7624210715293884
+        },
+        {
+          "patient_id": "TCGA-AG-4015",
+          "inference_time_ms": 8.626299997558817,
+          "total_time_ms": 8.650799994939007,
+          "label": 0.0,
+          "prob": 0.0023697782307863235
+        },
+        {
+          "patient_id": "TCGA-AA-3666",
+          "inference_time_ms": 5.883800011361018,
+          "total_time_ms": 7.09909999568481,
+          "label": 0.0,
+          "prob": 0.002958043245598674
+        },
+        {
+          "patient_id": "TCGA-AA-3696",
+          "inference_time_ms": 3.1485999934375286,
+          "total_time_ms": 3.168399998685345,
+          "label": 0.0,
+          "prob": 0.001731880009174347
+        },
+        {
+          "patient_id": "TCGA-AZ-5407",
+          "inference_time_ms": 5.882899989956059,
+          "total_time_ms": 5.902699995203875,
+          "label": 0.0,
+          "prob": 0.2958260178565979
+        },
+        {
+          "patient_id": "TCGA-EF-5830",
+          "inference_time_ms": 8.570899997721426,
+          "total_time_ms": 8.595799998147413,
+          "label": 0.0,
+          "prob": 0.012500060722231865
+        },
+        {
+          "patient_id": "TCGA-F4-6459",
+          "inference_time_ms": 7.988099998328835,
+          "total_time_ms": 8.03390001237858,
+          "label": 0.0,
+          "prob": 0.017760731279850006
+        },
+        {
+          "patient_id": "TCGA-F5-6464",
+          "inference_time_ms": 5.404700001236051,
+          "total_time_ms": 5.424400005722418,
+          "label": 0.0,
+          "prob": 0.17842206358909607
+        },
+        {
+          "patient_id": "TCGA-AA-3994",
+          "inference_time_ms": 2.810300007695332,
+          "total_time_ms": 2.833300008205697,
+          "label": 0.0,
+          "prob": 0.5586142539978027
+        },
+        {
+          "patient_id": "TCGA-AF-2690",
+          "inference_time_ms": 6.889900003443472,
+          "total_time_ms": 6.910500000230968,
+          "label": 0.0,
+          "prob": 0.9115029573440552
+        },
+        {
+          "patient_id": "TCGA-D5-6534",
+          "inference_time_ms": 5.533300005481578,
+          "total_time_ms": 6.3627999916207045,
+          "label": 0.0,
+          "prob": 0.8179974555969238
+        },
+        {
+          "patient_id": "TCGA-AG-A00C",
+          "inference_time_ms": 4.276599996956065,
+          "total_time_ms": 4.296300001442432,
+          "label": 0.0,
+          "prob": 0.011387188918888569
+        },
+        {
+          "patient_id": "TCGA-AG-3902",
+          "inference_time_ms": 4.877300001680851,
+          "total_time_ms": 4.8974999954225495,
+          "label": 0.0,
+          "prob": 0.0415179505944252
+        },
+        {
+          "patient_id": "TCGA-AA-3693",
+          "inference_time_ms": 3.807000000961125,
+          "total_time_ms": 3.826700005447492,
+          "label": 0.0,
+          "prob": 0.002018716186285019
+        },
+        {
+          "patient_id": "TCGA-A6-6142",
+          "inference_time_ms": 2.8340999997453764,
+          "total_time_ms": 2.853900004993193,
+          "label": 0.0,
+          "prob": 0.013114111497998238
+        },
+        {
+          "patient_id": "TCGA-F4-6463",
+          "inference_time_ms": 3.6222000053385273,
+          "total_time_ms": 3.642800002126023,
+          "label": 0.0,
+          "prob": 0.069601871073246
+        },
+        {
+          "patient_id": "TCGA-AF-2693",
+          "inference_time_ms": 2.601400003186427,
+          "total_time_ms": 2.6212000084342435,
+          "label": 0.0,
+          "prob": 0.014129405841231346
+        },
+        {
+          "patient_id": "TCGA-A6-5664",
+          "inference_time_ms": 7.458900014171377,
+          "total_time_ms": 7.488499992177822,
+          "label": 0.0,
+          "prob": 0.035441476851701736
+        },
+        {
+          "patient_id": "TCGA-AG-3894",
+          "inference_time_ms": 3.3503999875392765,
+          "total_time_ms": 4.062399995746091,
+          "label": 0.0,
+          "prob": 0.0018340826500207186
+        },
+        {
+          "patient_id": "TCGA-AG-3726",
+          "inference_time_ms": 2.0678000000771135,
+          "total_time_ms": 2.087900007609278,
+          "label": 0.0,
+          "prob": 0.05169578641653061
+        },
+        {
+          "patient_id": "TCGA-AA-3989",
+          "inference_time_ms": 3.1987999973353,
+          "total_time_ms": 3.218199999537319,
+          "label": 0.0,
+          "prob": 0.06505981832742691
+        },
+        {
+          "patient_id": "TCGA-AD-6963",
+          "inference_time_ms": 2.1422999998321757,
+          "total_time_ms": 2.1612999989883974,
+          "label": 0.0,
+          "prob": 0.9387531280517578
+        },
+        {
+          "patient_id": "TCGA-AG-3890",
+          "inference_time_ms": 2.209700003731996,
+          "total_time_ms": 2.2293999936664477,
+          "label": 0.0,
+          "prob": 0.006373721640557051
+        },
+        {
+          "patient_id": "TCGA-AF-6655",
+          "inference_time_ms": 2.1444000012706965,
+          "total_time_ms": 2.1646000095643103,
+          "label": 0.0,
+          "prob": 0.07076256722211838
+        },
+        {
+          "patient_id": "TCGA-D5-6539",
+          "inference_time_ms": 1.9071999995503575,
+          "total_time_ms": 1.927399993292056,
+          "label": 0.0,
+          "prob": 0.031855400651693344
+        }
+      ]
+    },
+    "memory_usage": {
+      "ram_baseline_mb": 345.29,
+      "ram_model_loaded_mb": 353.06,
+      "ram_end_inference_mb": 345.29,
+      "peak_ram_mb": 345.29,
+      "ram_increase_inference_mb": 0.0
+    },
+    "hardware_utilization": {
+      "cpu_model": "12th Gen Intel(R) Core(TM) i5-1235U",
+      "physical_cores": 10,
+      "logical_cores": 12,
+      "cpu_utilization_percent": 15.2,
+      "gpu_available": false,
+      "gpu_name": "None",
+      "gpu_memory_gb": 0,
+      "gpu_utilization_percent": 0,
+      "gpu_memory_used_gb": 0
+    },
+    "power_info": {
+      "status": "Power measurement unavailable on this hardware/software configuration."
+    }
+  }
+}

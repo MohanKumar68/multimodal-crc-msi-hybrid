@@ -5,10 +5,12 @@ import tempfile
 from pathlib import Path
 import time
 from unittest.mock import Mock, patch, MagicMock
+import numpy as np
 
 from src.wsi_pipeline.pipeline import WSIPipeline, WSIPipelineCLI, PipelineError
 from src.wsi_pipeline.manifest import ManifestManager, WSIManifest
 from src.wsi_pipeline.config import TechnicalMetadata, CaseMetadata
+from src.wsi_pipeline.slide_reader import SlideReader
 
 
 def test_wsi_pipeline_initialization():
@@ -146,6 +148,7 @@ def test_wsi_pipeline_slide_id_generation():
 def test_wsi_pipeline_processing_summary_generation():
     """Test processing summary generation."""
     pipeline = WSIPipeline()
+    pipeline.current_manifest = WSIManifest(slide_id="slide_001")
 
     # Mock processing times
     pipeline.processing_start_time = time.time()
@@ -180,8 +183,8 @@ def test_wsi_pipeline_status_with_no_current():
     pipeline.patch_extractor = Mock()
 
     with pytest.raises(Exception):
-        # Should raise error when trying to access status with no components
-        pass  # WSIPipelineCLI would handle this
+        # Should raise error when trying to generate processing summary with no current manifest
+        pipeline._generate_processing_summary("dummy_path", "dummy_id", {}, "dummy_manifest_path")
 
 
 def test_wsi_pipeline_manifest_creation():
@@ -249,8 +252,8 @@ def test_wsi_pipeline_component_integration():
 
     # Mock all components
     mock_reader = Mock(spec=SlideReader)
-    mock_detector = Mock(spec=Mock)  # Mock for TissueDetector
-    mock_extractor = Mock(spec=Mock)  # Mock for PatchExtractor
+    mock_detector = Mock()  # Mock for TissueDetector
+    mock_extractor = Mock()  # Mock for PatchExtractor
 
     # Set up mock methods
     mock_reader.get_level_dimensions.return_value = (10000, 10000)

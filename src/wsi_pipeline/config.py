@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Any, Union
 from datetime import datetime
 from enum import Enum
-from pydantic import BaseModel, validator, Field
+from pydantic import BaseModel, validator, Field, field_validator
 import hashlib
 
 
@@ -199,7 +199,7 @@ class MetadataSchema(BaseModel):
         description="Source of metadata (e.g., 'manual', 'automatic')"
     )
 
-    @validator('file_format')
+    @field_validator('file_format')
     def validate_file_format(cls, v):
         """Validate file format value."""
         valid_formats = [fmt.value for fmt in SlideFormat]
@@ -208,7 +208,7 @@ class MetadataSchema(BaseModel):
             return SlideFormat.UNKNOWN.value
         return v_lower
 
-    @validator('case_id')
+    @field_validator('case_id')
     def validate_case_id(cls, v):
         """Validate case ID length and content."""
         if v is not None and len(v.strip()) == 0:

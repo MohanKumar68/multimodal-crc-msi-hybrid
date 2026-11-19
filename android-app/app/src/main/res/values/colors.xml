@@ -1,0 +1,8 @@
+<resources>
+    <color name="pathology_navy">#0F1D38</color>
+    <color name="pathology_teal">#006970</color>
+    <color name="pathology_teal_dark">#004F55</color>
+    <color name="pathology_background">#F8F9FA</color>
+    <color name="pathology_surface">#FFFFFF</color>
+    <color name="pathology_surface_variant">#F1F5F9</color>
+</resources>

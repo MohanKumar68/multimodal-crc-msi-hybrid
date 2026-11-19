@@ -1,0 +1,2 @@
+timestamp,accuracy,roc_auc,avg_latency_ms,median_latency_ms,p95_latency_ms,throughput_pts_sec,throughput_pts_min,peak_ram_mb,python_version,pytorch_version
+2026-10-07T12:13:39.400591,0.8939393939393939,0.92875,41.0086742410909,32.96715000033146,109.7886749994359,20.38863455958425,1223.318073575055,358.51953125,3.11.7,2.9.1+cpu

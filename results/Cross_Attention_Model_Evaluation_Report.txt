@@ -2,7 +2,7 @@
 
 Evaluated on 66 isolated validation patients.
 Overall Accuracy: 0.8939
-ROC-AUC Score: 0.9150
+ROC-AUC Score: 0.9187
 
 Classification Report:
                precision    recall  f1-score   support

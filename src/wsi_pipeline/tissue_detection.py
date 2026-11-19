@@ -70,9 +70,14 @@ class TissueDetector:
         Raises:
             TissueDetectorError: If tissue detection fails
         """
+        if image is None:
+            raise TissueDetectorError("Input image cannot be None")
+
         try:
             # Convert to numpy array for processing
             img_array = np.array(image)
+            if img_array.size == 0:
+                raise TissueDetectorError("Input image is empty")
 
             if len(img_array.shape) == 3:
                 # RGB image - convert to HSV
@@ -221,7 +226,48 @@ class TissueDetector:
             binary_mask = tissue_mask > 127
 
             # Find connected components
-            labeled_array, num_features = morphology.label(binary_mask)
+            label_result = morphology.label(binary_mask)
+            if isinstance(label_result, tuple):
+                labeled_array, num_features = label_result
+            else:
+                labeled_array = label_result
+                num_features = np.max(labeled_array)
+
+            print(f"Number of features: {num_features}")  # Debug print
+
+            candidate_regions = []
+
+            for label in range(1, num_features + 1):
+                # Get bounding box of component
+                component = (labeled_array == label)
+                y_coords, x_coords = np.where(component)
+                if len(y_coords) == 0 or len(x_coords) == 0:
+                    continue
+
+                y_min, y_max = np.min(y_coords), np.max(y_coords)
+                x_min, x_max = np.min(x_coords), np.max(x_coords)
+                width = x_max - x_min + 1
+                height = y_max - y_min + 1
+
+                print(f"Component {label}: (x_min={x_min}, y_min={y_min}, width={width}, height={height})")  # Debug print
+
+                print(f"Checking component {label} against min_patch_size={min_patch_size}")  # Debug print
+                if width >= min_patch_size and height >= min_patch_size:
+                    print(f"Component {label} meets min_patch_size")  # Debug print
+                    # Calculate coverage of this region within its bounding box
+                    region_area = width * height
+                    component_pixels = np.sum(label == labeled_array[y_min:y_max+1, x_min:x_max+1])
+                    region_coverage = component_pixels / region_area
+
+                    print(f"Component {label} coverage: {region_coverage}")  # Debug print
+
+                    if region_coverage >= min_coverage_threshold:
+                        candidate_regions.append((x_min, y_min, width, height))
+                        print(f"Added component {label} to candidate regions")  # Debug print
+                    else:
+                        print(f"Component {label} failed coverage threshold")  # Debug print
+                else:
+                    print(f"Component {label} failed min_patch_size")  # Debug print
 
             candidate_regions = []
 
@@ -289,7 +335,7 @@ class TissueDetector:
 
         except Exception as e:
             logger.warning(f"Visualization creation failed: {e}")
-            return Image.new("RGB", (100, 100), (0, 0, 0))
+            return Image.new("RGB", (10, 10), (0, 0, 0))
 
     def __repr__(self) -> str:
         """String representation."""

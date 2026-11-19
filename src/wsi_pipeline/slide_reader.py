@@ -241,19 +241,24 @@ class SlideReader:
             Tuple of (width, height)
 
         Raises:
-            SlideReaderError: If level is invalid
+            SlideReaderError: If slide is not open or level is invalid
         """
-        if not self.slide:
+        if not self.slide or not self._is_open:
             raise SlideReaderError("Slide not open")
 
-        # Get the actual number of levels from the slide
-        actual_level_count = len(self.slide.level_dimensions)
-        if level < 0 or level >= actual_level_count:
-            raise SlideReaderError(
-                f"Invalid level {level}. Valid range: 0-{actual_level_count - 1}"
-            )
+        if level < 0:
+            raise SlideReaderError(f"Invalid level {level}. Level cannot be negative")
 
-        return self.slide.level_dimensions[level]
+        # Get the actual number of levels from the slide
+        try:
+            actual_level_count = len(self.slide.level_dimensions)
+            if level >= actual_level_count:
+                raise SlideReaderError(
+                    f"Invalid level {level}. Valid range: 0-{actual_level_count - 1}"
+                )
+            return self.slide.level_dimensions[level]
+        except AttributeError:
+            raise SlideReaderError("Slide does not have level_dimensions attribute")
 
     def get_level_downsample(self, level: int = 0) -> float:
         """
@@ -266,19 +271,24 @@ class SlideReader:
             Downsample factor
 
         Raises:
-            SlideReaderError: If level is invalid
+            SlideReaderError: If slide is not open or level is invalid
         """
-        if not self.slide:
+        if not self.slide or not self._is_open:
             raise SlideReaderError("Slide not open")
 
-        # Get the actual number of levels from the slide
-        actual_level_count = len(self.slide.level_dimensions)
-        if level < 0 or level >= actual_level_count:
-            raise SlideReaderError(
-                f"Invalid level {level}. Valid range: 0-{actual_level_count - 1}"
-            )
+        if level < 0:
+            raise SlideReaderError(f"Invalid level {level}. Level cannot be negative")
 
-        return self.slide.level_downsamples[level]
+        # Get the actual number of levels from the slide
+        try:
+            actual_level_count = len(self.slide.level_dimensions)
+            if level >= actual_level_count:
+                raise SlideReaderError(
+                    f"Invalid level {level}. Valid range: 0-{actual_level_count - 1}"
+                )
+            return self.slide.level_downsamples[level]
+        except AttributeError:
+            raise SlideReaderError("Slide does not have level_dimensions attribute")
 
     def close(self) -> None:
         """Close the slide and release resources."""

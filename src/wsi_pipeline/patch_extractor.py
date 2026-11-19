@@ -16,7 +16,7 @@ import numpy as np
 
 from PIL import Image
 
-from .config import TechnicalMetadata, CaseMetadata, ExtractionConfig
+from .config import TechnicalMetadata, CaseMetadata
 from .slide_reader import SlideReader
 from .tissue_detection import TissueDetector
 
@@ -445,8 +445,7 @@ class PatchExtractor:
         Returns:
             Processing summary dictionary
         """
-        total_time = (self.processing_end_time - self.processing_start_time)
-        if self.processing_start_time and self.processing_end_time else 0
+        total_time = (self.processing_end_time - self.processing_start_time) if self.processing_start_time and self.processing_end_time else 0.0
 
         summary = {
             "slide_id": slide_id,

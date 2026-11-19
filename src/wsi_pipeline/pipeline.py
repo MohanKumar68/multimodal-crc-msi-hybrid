@@ -10,11 +10,12 @@ from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 import logging
 
-from .config import TechnicalMetadata, CaseMetadata, ExtractionConfig
+from .config import TechnicalMetadata, CaseMetadata
 from .slide_reader import SlideReader
 from .tissue_detection import TissueDetector
 from .patch_extractor import PatchExtractor, PatchRecord
-from .manifest import WSIManifest, ManifestManager
+from .manifest import WSIManifest, ManifestManager, ExtractionConfig
+from .phikon_embedding_generator import PhikonEmbeddingGenerator
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -99,9 +100,26 @@ class WSIPipeline:
             self.processing_start_time = time.time()
             logger.info(f"Starting WSI pipeline processing: {slide_path}")
 
+            # Check if current manifest is set
+            if self.current_manifest is None:
+                # Generate slide_id if not provided
+                current_slide_id = slide_id or self._generate_slide_id(slide_path)
+                self.current_slide_id = current_slide_id
+                # Create a new manifest if not set
+                self.current_manifest = WSIManifest(
+                    slide_id=current_slide_id,
+                    source_file=slide_path,
+                    extraction_config=ExtractionConfig(**self.config.get("patch_extraction", {})),
+                    run_id=run_id or f"{current_slide_id}_{int(time.time())}"
+                )
+                logger.info(f"Created new manifest for {current_slide_id}")
+
             # Initialize components if not already done
             if not self.slide_reader or not self.tissue_detector or not self.patch_extractor:
                 self.initialize_components()
+
+            # Initialize Phikon embedding generator
+            self.phikon_generator = PhikonEmbeddingGenerator()
 
             # Generate slide ID if not provided
             current_slide_id = slide_id or self._generate_slide_id(slide_path)
@@ -227,9 +245,14 @@ class WSIPipeline:
 
         Returns:
             Processing summary dictionary
+
+        Raises:
+            PipelineError: If no current manifest is set
         """
-        total_time = (self.processing_end_time - self.processing_start_time)
-        if self.processing_start_time and self.processing_end_time else 0
+        if not self.current_manifest:
+            raise PipelineError("No current manifest set for processing summary")
+
+        total_time = (self.processing_end_time - self.processing_start_time) if self.processing_start_time and self.processing_end_time else 0.0
 
         summary = {
             "slide_id": slide_id,
@@ -251,7 +274,10 @@ class WSIPipeline:
             "extracted_patches": extraction_summary.get("extracted_patches", 0),
             "successful_patches": len(self.current_manifest.get_successful_patches()) if self.current_manifest else 0,
             "failed_patches": len(self.current_manifest.get_failed_patches()) if self.current_manifest else 0,
-            "skipped_patches": len(self.current_manifest.get_failed_patches()) if self.current_manifest else 0,
+            "skipped_patches": sum(
+                1 for p in self.current_manifest.patch_records
+                if p.extraction_status == "skipped"
+            ) if self.current_manifest else 0,
             "pipeline_version": "1.0.0"
         }
 
@@ -261,13 +287,33 @@ class WSIPipeline:
         """Clean up pipeline resources."""
         try:
             if self.slide_reader:
-                self.slide_reader.close()
-                self.slide_reader = None
+                try:
+                    self.slide_reader.close()
+                except Exception as e:
+                    logger.error(f"Error closing slide reader: {e}")
+                finally:
+                    self.slide_reader = None
 
-            logger.info("Pipeline cleaned up")
+            if self.tissue_detector:
+                try:
+                    self.tissue_detector.close()
+                except Exception as e:
+                    logger.error(f"Error closing tissue detector: {e}")
+                finally:
+                    self.tissue_detector = None
+
+            if self.patch_extractor:
+                try:
+                    self.patch_extractor.cleanup()
+                except Exception as e:
+                    logger.error(f"Error cleaning up patch extractor: {e}")
+                finally:
+                    self.patch_extractor = None
+
+            logger.info("Pipeline resources cleaned up")
 
         except Exception as e:
-            logger.warning(f"Error during cleanup: {e}")
+            logger.warning(f"Unexpected error during cleanup: {e}")
 
     def __enter__(self) -> "WSIPipeline":
         """Context manager entry."""

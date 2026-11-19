@@ -122,9 +122,10 @@ def test_slide_reader_get_level_downsample():
     """Test level downsample retrieval."""
     reader = SlideReader()
 
-    # Mock slide with downsample factors
+    # Mock slide with level dimensions and downsamples
     class MockSlide:
-        level_downsamples = [1.0, 2.0, 4.0, 8.0, 16.0]
+        level_dimensions = [(10000, 10000), (5000, 5000), (2500, 2500)]
+        level_downsamples = [1.0, 2.0, 4.0]
 
     reader.slide = MockSlide()
     reader._is_open = True

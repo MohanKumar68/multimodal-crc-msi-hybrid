@@ -56,7 +56,7 @@ class MultimodalTCGADataset(Dataset):
                     "text_path": text_path
                 })
                 
-        print(f"✅ Verified {len(self.valid_patients)} multimodal patients ready for training.")
+        print(f"[OK] Verified {len(self.valid_patients)} multimodal patients ready for training.")
 
     def __len__(self):
         return len(self.valid_patients)

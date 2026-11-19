@@ -208,6 +208,8 @@ def test_wsi_manifest_get_successful_patches():
     successful = manifest.get_successful_patches()
     assert len(successful) == 2
     assert all(p.extraction_status == "completed" for p in successful)
+    # Verify that only patches with status 'completed' are included
+    assert all(p.patch_id in [r.patch_id for r in records if r.extraction_status == "completed"] for p in successful)
 
 
 def test_wsi_manifest_dict_conversion():
@@ -373,7 +375,9 @@ def test_manifest_manager_list_manifests():
         # List filtered by slide_id
         slide_manifests = manager.list_manifests("slide_001")
         assert len(slide_manifests) == 1
-        assert "slide_001" in slide_manifests[0]
+        # Check if the manifest contains the slide_id by loading it
+        manifest = manager.load_manifest(slide_manifests[0])
+        assert manifest.slide_id == "slide_001"
 
 
 def test_manifest_manager_cleanup_old_manifests():

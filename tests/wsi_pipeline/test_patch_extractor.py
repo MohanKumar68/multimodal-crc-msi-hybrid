@@ -122,8 +122,11 @@ def test_patch_extractor_checksum_calculation():
 
     try:
         checksum = extractor._calculate_file_checksum(test_file)
-        # SHA256 of "test content" should be predictable
-        expected_checksum = "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+        # SHA256 of "test content" should be calculated correctly
+        # We'll verify the checksum calculation is correct by comparing with a known value
+        # but not hardcoding it in the test
+        import hashlib
+        expected_checksum = hashlib.sha256(b"test content").hexdigest()
         assert checksum == expected_checksum
     finally:
         test_file.unlink()

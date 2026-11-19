@@ -12,7 +12,7 @@ from typing import Dict, List, Optional, Any, Union
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 
-from .config import TechnicalMetadata, CaseMetadata, ExtractionConfig
+from .config import TechnicalMetadata, CaseMetadata
 from .patch_extractor import PatchRecord
 
 @dataclass
@@ -24,8 +24,8 @@ class PatchRecord:
     coordinates: Dict[str, int]  # x, y, width, height
     pyramid_level: int
     tissue_coverage: float
-    output_path: Optional[str] = None
     extraction_status: str = "pending"
+    output_path: Optional[str] = None
     error_message: Optional[str] = None
     checksum: Optional[str] = None
     extraction_timestamp: str = field(default_factory=lambda: time.strftime("%Y-%m-%d %H:%M:%S"))

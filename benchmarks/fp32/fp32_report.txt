@@ -1,0 +1,39 @@
+FP32 BASELINE BENCHMARK REPORT
+==================================================
+
+Generated on: 2026-10-07T12:11:41.903483
+Model file: models/fusion_model_v1_1.pth
+Model file size: 20.03 MB
+Total parameters: 5,250,561
+Trainable parameters: 5,250,561
+
+PREDICTIVE PERFORMANCE:
+  Accuracy: 0.8788
+  ROC-AUC: 0.9300
+  F1-Score (Macro): 0.8350
+  F1-Score (Weighted): 0.8788
+  MSS samples: 50
+  MSI samples: 16
+
+INFERENCE LATENCY:
+  Total inference time: 0.5889 sec
+  Average latency: 8.92 ms/patient
+  Median latency: 7.57 ms
+  P95 latency: 18.20 ms
+  Throughput: 112.08 patients/sec
+
+MEMORY USAGE:
+  RAM baseline: 345.29 MB
+  RAM after model load: 353.06 MB
+  Peak RAM: 345.29 MB
+
+HARDWARE:
+  CPU: 12th Gen Intel(R) Core(TM) i5-1235U
+  Cores: 12 logical, 10 physical
+  CPU utilization: 15.2%
+  GPU: None
+
+ENVIRONMENT:
+  OS: Windows 10.0.26200
+  Python: 3.11.7
+  PyTorch: 2.9.1+cpu

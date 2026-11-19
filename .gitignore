@@ -1,67 +1,106 @@
-# ── Heavy dataset — 10GB+ (Kaggle tcga_coad_msi_mss_jpg) ──
-# Archive dump (12G) — see data/DATASET.md for download & placement
-archive/
-archive.zip
-*.zip
-*.crdownload
-Unconfirmed*.crdownload
+# ==============================================================================
+# Multimodal CRC MSI Hybrid System - .gitignore
+# ==============================================================================
 
-# Clean tensors — 1.2G (653 × .pt) — regenerate or download via Kaggle + Phikon-v2/ClinicalBERT encoding
-data/clean_tensors/
-# Keep registry (13MB) but tensors are heavy — see UNPUSHED.md
-
-# Raw JPEG patches — 192k images (6GB) — symlinked to archive, excluded
-data/MSIMUT_JPEG/*.jpg
-data/MSS_JPEG/*.jpg
-data/MSIMUT_JPEG/*.jpeg
-data/MSS_JPEG/*.jpeg
-# Keep placeholders
-!data/MSIMUT_JPEG/.gitkeep
-!data/MSIMUT_JPEG/README.txt
-!data/MSS_JPEG/.gitkeep
-!data/MSS_JPEG/README.txt
-
-# Large model checkpoints — keep primary (21MB) but exclude duplicates if repo limit hit
-# Uncomment to exclude all .pth and use Releases/LFS:
-# models/*.pth
-# Keep at least fusion_model_v1_1.pth (primary) — 21MB < 100MB limit
-# To use Git LFS: git lfs track "*.pth" && git lfs track "*.pt"
-
-# Python
+# Python Environment & Cache
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .venv/
 venv/
+env/
 .env
 *.egg-info/
 .ipynb_checkpoints/
 .pytest_cache/
 .mypy_cache/
 
-# Logs & temp
+# Android Build & Local Configuration
+android-app/.gradle/
+android-app/**/build/
+android-app/local.properties
+android-app/.idea/
+android-app/.kotlin/
+android-app/app/build/
+android-app/*.iml
+android-app/**/*.iml
+.externalNativeBuild/
+.cxx/
+local.properties
+
+# Release Binaries (distributed via GitHub Releases, not committed to git tree)
+release/*.apk
+*.apk
+
+# Backups & Scratch Workspaces
+_backups/
+scratch/
+scratch_slides_dump.json
+resume_notes.txt
+phase8*.txt
+temp_mock_setup.txt
+determinism_test.txt
+build_script_recovered.py
+crop_*.png
+inference-test.html
+wsi_extracted_patches/
+
+# Presentation & Private Working Documents (kept in local workstation archive)
+*.docx
+*.pptx
+*.pdf
+!docs/assets/reports/*.pdf
+*.patch
+
+# Internal Prompts & Development Audit Folders
+audit_TCGA-AA-3864/
+audit_reports/
+PROJECT_CONTEXT/
+CRC_res/
+memory/
+paper_deliverables/
+extracted_figures/
+
+# Local Caches & Generated Interactive XAI Files
+.cache/
+Interactive_XAI*.png
+src/Interactive_XAI*.png
+src/*.png
+
+# Heavy Datasets (Kaggle TCGA-COAD / Raw Whole Slide Images)
+archive/
+archive.zip
+*.zip
+*.crdownload
+Unconfirmed*.crdownload
+data/clean_tensors/
+data/MSIMUT_JPEG/*.jpg
+data/MSS_JPEG/*.jpg
+data/MSIMUT_JPEG/*.jpeg
+data/MSS_JPEG/*.jpeg
+!data/MSIMUT_JPEG/.gitkeep
+!data/MSIMUT_JPEG/README.txt
+!data/MSS_JPEG/.gitkeep
+!data/MSS_JPEG/README.txt
+
+# Model Checkpoints
+# Explicitly track only primary trained cross-attention checkpoint (20 MB < 100 MB limit)
+models/optimized/
+results/optimized/
+
+# Logs & Temporary Files
 *.log
 logs/
 tmp/
 .tmp/
 .streamlit/secrets.toml
-/tmp/
 
-# OS
+# Operating System & IDE Artifacts
 .DS_Store
 Thumbs.db
 *.swp
 *~
-
-# IDE
 .vscode/
 .idea/
 *.code-workspace
-
-# Huggingface cache (local)
-.cache/
-# Generated heatmap outputs
-Interactive_XAI*.png
-src/Interactive_XAI*.png
-src/*.png

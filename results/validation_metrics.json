@@ -1,0 +1,222 @@
+{
+  "metadata": {
+    "execution_timestamp": "2026-10-20T16:50:07.577848",
+    "cohort_source": "TCGA-COAD/READ",
+    "validation_patient_count": 66,
+    "mss_count": 50,
+    "msi_count": 16,
+    "operating_threshold": 0.83,
+    "secondary_threshold": 0.5,
+    "random_seed": 42,
+    "bootstrap_replicates": 1000,
+    "software_versions": {
+      "python": "3.11.7 (tags/v3.11.7:fa7a6f2, Dec  4 2023, 19:24:49) [MSC v.1937 64 bit (AMD64)]",
+      "torch": "2.9.1+cpu",
+      "numpy": "2.2.6",
+      "sklearn": "1.9.1"
+    },
+    "artifacts": {
+      "cross_attention_checkpoint": {
+        "path": "models/fusion_model_v1_1.pth",
+        "size_bytes": 21007347,
+        "md5": "28a024c05e63bbd4087ba401f4607810",
+        "sha256": "e9a7bbcdbe1713a0ed14b6ecd511ac65d046a52e2f03c69443f5bd3dcf12d453"
+      },
+      "late_fusion_checkpoint": {
+        "path": "models/late_fusion_model_v1_0.pth",
+        "size_bytes": 5255861,
+        "md5": "b1ea9516af889c830ad235535ef7b6b7",
+        "sha256": "e98b945354578055aa691f2469390346753523ce7e50315f77098f33d2626ae7"
+      },
+      "patient_registry": {
+        "path": "data/patient_registry.json",
+        "size_bytes": 13158992,
+        "md5": "1162cf4a533a549a316c0d997c58134d",
+        "sha256": "7d1c92c51741e080787607733a8b34cb07252c804f527cd567937345a5b22ce2"
+      },
+      "validation_keys": {
+        "path": "results/actual_validation_keys.json",
+        "size_bytes": 1056,
+        "md5": "b8a371301ff02b73549f598d82a44b57",
+        "sha256": "61d7f8d98388efbe9fc5e000d695b2f41022720a14a8308a6317bc9441930aa9"
+      }
+    }
+  },
+  "cross_attention": {
+    "deterministic_subsampling_tau_0_83": {
+      "threshold": 0.83,
+      "accuracy": 0.8939393939393939,
+      "roc_auc": 0.92625,
+      "sensitivity": 0.75,
+      "specificity": 0.94,
+      "precision": 0.8,
+      "f1_score": 0.7741935483870968,
+      "brier_score": 0.12527783330689793,
+      "confusion_matrix": {
+        "tn": 47,
+        "fp": 3,
+        "fn": 4,
+        "tp": 12
+      },
+      "bootstrap_95ci": {
+        "n_replicates": 1000,
+        "seed": 42,
+        "auc_valid_replicates": 1000,
+        "auc_skipped_single_class_replicates": 0,
+        "accuracy_95ci": [
+          0.8181818181818182,
+          0.9545454545454546
+        ],
+        "roc_auc_95ci": [
+          0.8532548972766364,
+          0.9775305851063829
+        ],
+        "sensitivity_95ci": [
+          0.5,
+          0.9375919117647058
+        ],
+        "specificity_95ci": [
+          0.8627450980392157,
+          1.0
+        ],
+        "precision_95ci": [
+          0.5833333333333334,
+          1.0
+        ],
+        "f1_score_95ci": [
+          0.5714285714285714,
+          0.9142857142857143
+        ],
+        "brier_score_95ci": [
+          0.06643485035349372,
+          0.19137039047499876
+        ]
+      }
+    },
+    "deterministic_subsampling_tau_0_50": {
+      "threshold": 0.5,
+      "accuracy": 0.8181818181818182,
+      "roc_auc": 0.92625,
+      "sensitivity": 0.75,
+      "specificity": 0.84,
+      "precision": 0.6,
+      "f1_score": 0.6666666666666666,
+      "brier_score": 0.12527783330689793,
+      "confusion_matrix": {
+        "tn": 42,
+        "fp": 8,
+        "fn": 4,
+        "tp": 12
+      }
+    },
+    "full_patches_tau_0_83": {
+      "threshold": 0.83,
+      "accuracy": 0.8787878787878788,
+      "roc_auc": 0.93375,
+      "sensitivity": 0.75,
+      "specificity": 0.92,
+      "precision": 0.75,
+      "f1_score": 0.75,
+      "brier_score": 0.12043425879143244,
+      "confusion_matrix": {
+        "tn": 46,
+        "fp": 4,
+        "fn": 4,
+        "tp": 12
+      }
+    }
+  },
+  "late_fusion": {
+    "deterministic_subsampling_tau_0_83": {
+      "threshold": 0.83,
+      "accuracy": 0.8484848484848485,
+      "roc_auc": 0.8899999999999999,
+      "sensitivity": 0.375,
+      "specificity": 1.0,
+      "precision": 1.0,
+      "f1_score": 0.5454545454545454,
+      "brier_score": 0.11907715020580101,
+      "confusion_matrix": {
+        "tn": 50,
+        "fp": 0,
+        "fn": 10,
+        "tp": 6
+      },
+      "bootstrap_95ci": {
+        "n_replicates": 1000,
+        "seed": 42,
+        "auc_valid_replicates": 1000,
+        "auc_skipped_single_class_replicates": 0,
+        "accuracy_95ci": [
+          0.7575757575757576,
+          0.9246212121212117
+        ],
+        "roc_auc_95ci": [
+          0.8009804175293306,
+          0.9587568597560976
+        ],
+        "sensitivity_95ci": [
+          0.1332608695652174,
+          0.6251644736842104
+        ],
+        "specificity_95ci": [
+          1.0,
+          1.0
+        ],
+        "precision_95ci": [
+          1.0,
+          1.0
+        ],
+        "f1_score_95ci": [
+          0.23518099547511312,
+          0.7693548387096774
+        ],
+        "brier_score_95ci": [
+          0.07013200250435624,
+          0.1691039406023835
+        ]
+      }
+    },
+    "deterministic_subsampling_tau_0_50": {
+      "threshold": 0.5,
+      "accuracy": 0.8181818181818182,
+      "roc_auc": 0.8899999999999999,
+      "sensitivity": 0.4375,
+      "specificity": 0.94,
+      "precision": 0.7,
+      "f1_score": 0.5384615384615384,
+      "brier_score": 0.11907715020580101,
+      "confusion_matrix": {
+        "tn": 47,
+        "fp": 3,
+        "fn": 9,
+        "tp": 7
+      }
+    },
+    "full_patches_tau_0_83": {
+      "threshold": 0.83,
+      "accuracy": 0.8484848484848485,
+      "roc_auc": 0.8937499999999999,
+      "sensitivity": 0.375,
+      "specificity": 1.0,
+      "precision": 1.0,
+      "f1_score": 0.5454545454545454,
+      "brier_score": 0.11756217521683533,
+      "confusion_matrix": {
+        "tn": 50,
+        "fp": 0,
+        "fn": 10,
+        "tp": 6
+      }
+    }
+  },
+  "delta_cross_attention_minus_late_fusion_tau_0_83": {
+    "accuracy": 0.045454545454545414,
+    "roc_auc": 0.036250000000000115,
+    "sensitivity": 0.375,
+    "specificity": -0.06000000000000005,
+    "precision": -0.19999999999999996,
+    "f1_score": 0.22873900293255134,
+    "brier_score": 0.006200683101096921
+  }
+}

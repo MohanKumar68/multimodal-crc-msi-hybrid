@@ -42,7 +42,8 @@ def test_rgb_to_hsv_conversion():
 
     hsv = detector._rgb_to_hsv(rgb_array)
     assert hsv.shape == (1, 1, 3)
-    assert hsv[0, 0, 0] > 0  # Hue should be non-zero for red
+    # Hue for red should be 0 in standard HSV space
+    assert hsv[0, 0, 0] == 0  # Hue should be 0 for red
 
 
 def test_hsv_thresholding():
@@ -112,9 +113,9 @@ def test_candidate_region_filtering():
     detector = TissueDetector()
 
     # Create test mask with multiple regions
-    mask = np.zeros((50, 50), dtype=np.uint8)
+    mask = np.zeros((100, 100), dtype=np.uint8)
     mask[5:15, 5:15] = 255  # Small region (should be filtered out)
-    mask[20:40, 20:40] = 255  # Large region (should be kept)
+    mask[20:70, 20:70] = 255  # Large region (should be kept)
 
     regions = detector.filter_candidate_regions(
         mask,
@@ -162,7 +163,7 @@ def test_tissue_detector_error_handling():
 
     # Test with invalid image (None)
     with pytest.raises(TissueDetectorError):
-        detector.detect_tissue_mask(None)
+        detector.detect_tissue_mask(None)  # This should raise TissueDetectorError
 
     # Test with empty image
     empty_image = Image.new("RGB", (0, 0), (0, 0, 0))

@@ -1,6 +1,6 @@
 """
 Multimodal Colorectal Cancer Diagnostic Framework — Streamlit Production App
-Architecture: SummaryToPatchCrossAttention (Phikon-v2 + ClinicalBERT) + Dual-Tier XAI + Qwen Scribe
+Architecture: SummaryToPatchCrossAttention (Phikon-v2 + ClinicalBERT) + Dual-Tier XAI + LLM Scribe (Gemma/Ollama)
 """
 import os
 import sys
@@ -136,10 +136,13 @@ Paragraph 1: State the analysis summary and confidence.
 Paragraph 2: Describe the key spatial findings indicating the status based on the AI attention (do not invent patch filenames).
 Paragraph 3: Provide a brief clinical recommendation (ICIs if MSI, standard chemo if MSS, suggest confirmatory IHC/PCR if borderline)."""
     try:
+        ollama_base = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/")
+        ollama_model = os.getenv("OLLAMA_MODEL", "gemma3:1b")
+        ollama_timeout = int(os.getenv("OLLAMA_TIMEOUT", "120"))
         resp = requests.post(
-            "http://localhost:11434/api/generate",
-            json={"model": "qwen2.5-coder:7b", "prompt": prompt, "stream": False},
-            timeout=30,
+            f"{ollama_base}/api/generate",
+            json={"model": ollama_model, "prompt": prompt, "stream": False},
+            timeout=ollama_timeout,
         )
         if resp.ok and "response" in resp.json():
             return resp.json()["response"]
@@ -364,7 +367,7 @@ if st.session_state.get("analysis_complete"):
                 else:
                     st.error("Image not found on disk.")
     with right:
-        st.markdown("**Automated Pathology Scribe (Qwen 2.5 via Ollama)**")
+        st.markdown("**Automated Pathology Scribe (Gemma 3 via Ollama)**")
         report = st.session_state.get("scribe_report", "")
         st.info(report)
         st.download_button("Download Report (.txt)", data=report, file_name=f"{patient_id}_scribe_report.txt", mime="text/plain")

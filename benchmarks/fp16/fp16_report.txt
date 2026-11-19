@@ -1,0 +1,18 @@
+FP16 PERFORMANCE BENCHMARK REPORT
+==================================================
+
+Generated on: 2026-10-07T12:13:39.414270
+Model: FP16 (fusion_model_fp16.pth)
+Patients: 66
+Accuracy: 0.8939
+ROC-AUC: 0.9287
+Average Latency: 41.01 ms
+Throughput: 20.39 patients/sec (1223.32 patients/min)
+Peak RAM: 358.83 MB
+
+FP32 vs FP16 Comparison:
+  Accuracy: FP32 = 0.8788 | FP16 = 0.8939 | Diff = 0.0152
+  ROC-AUC: FP32 = 0.9300 | FP16 = 0.9287 | Diff = 0.0012
+  Avg Latency: FP32 = 8.92 ms | FP16 = 41.01 ms | Diff = 32.09 ms
+  Model Size: FP32 = 20.03 MB | FP16 = 10.02 MB | Diff = 10.01 MB
+  Throughput: FP32 = 112.08 patients/sec | FP16 = 20.39 patients/sec | Diff = 91.69 patients/sec

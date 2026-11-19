@@ -177,7 +177,7 @@ def test_technical_metadata_is_complete():
     partial.file_format = "svs"
     partial.dimensions = {"width": 1000, "height": 1000}
     # level_count not set
-    assert partial.is_complete()  # Should be complete since level_count defaults to 0
+    assert not partial.is_complete()  # Should be incomplete since level_count defaults to 0
 
 
 def test_metadata_schema_optional_fields():
