@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CRC MSI Res</string>
+    <string name="app_name">PathoFuse</string>
     <string name="app_full_title">Colorectal Cancer MSI/MSS Research Assistant</string>
     <string name="app_subtitle">Multimodal Histopathology &amp; Clinical Text Fusion</string>
     <string name="investigational_disclaimer">INVESTIGATIONAL RESEARCH PROTOTYPE — FOR RESEARCH USE ONLY. Not certified, approved, or validated as a clinical diagnostic medical device. Do not use for patient management or clinical treatment decisions.</string>
